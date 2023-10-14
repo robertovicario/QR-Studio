@@ -10,7 +10,11 @@ import java.awt.*;
  * @version 1.0
  */
 public class App extends JFrame {
-    public App() {
+    private final int tab;
+
+    public App(int tab) {
+        this.tab = tab;
+
         try {
             UIManager.setLookAndFeel(new FlatLightOwlIJTheme());
         } catch (UnsupportedLookAndFeelException e) {
@@ -25,8 +29,13 @@ public class App extends JFrame {
         JTabbedPane jTabbedPane1 = new JTabbedPane();
 
         jTabbedPane1.addTab("Overview", new Overview());
-        jTabbedPane1.addTab("Generator", new Generator());
-        jTabbedPane1.setSelectedIndex(1);
+        jTabbedPane1.addTab("Generator", new Generator(jFrame));
+
+        if (tab == 0) {
+            jTabbedPane1.setSelectedIndex(0);
+        } else {
+            jTabbedPane1.setSelectedIndex(1);
+        }
 
         GroupLayout layout = new GroupLayout(jFrame.getContentPane());
         jFrame.getContentPane().setLayout(layout);

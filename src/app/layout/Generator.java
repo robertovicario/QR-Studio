@@ -9,24 +9,26 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Generator extends JPanel {
+    private final JFrame jFrame;
     private final JTextField jTextField1 = new JTextField("https://www.example.com");
     private final JButton jButton1 = new JButton("Check");
     private final JLabel jLabel2 = new JLabel("Status: Valid URL");
     private final JButton jButton2 = new JButton("Info");
     private final JComboBox<String> jComboBox1 = new JComboBox<>();
-    private final JLabel jLabel4 = new JLabel("Width: 512, Height: 512");
+    private final JLabel jLabel4 = new JLabel("Dimension: 512 x 512");
     private final JLabel jLabel6 = new JLabel("Background: White");
     private final JCheckBox jCheckBox1 = new JCheckBox("White");
     private final JCheckBox jCheckBox2 = new JCheckBox("Black");
     private final JLabel jLabel7 = new JLabel("Color: Black");
     private final JCheckBox jCheckBox3 = new JCheckBox("Black");
     private final JCheckBox jCheckBox4 = new JCheckBox("White");
-    private final JCheckBox jCheckBox5 = new JCheckBox("Custom");
+    private final JCheckBox jCheckBox5 = new JCheckBox("Choose");
     private final JButton jButton3 = new JButton("Download");
     private final JButton jButton4 = new JButton("Reset");
     CoreGenerator coreGenerator = new CoreGenerator();
 
-    public Generator() {
+    public Generator(JFrame jFrame) {
+        this.jFrame = jFrame;
         initComponents();
         initEvents();
     }
@@ -87,7 +89,7 @@ public class Generator extends JPanel {
         jToolBar3.add(jLabel3);
         jToolBar3.add(filler4);
 
-        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { "LOW", "MID", "HIGH" }));
+        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { "Low", "Medium", "High" }));
         jComboBox1.setSelectedIndex(1);
         jToolBar3.add(jComboBox1);
         jToolBar3.add(filler5);
@@ -149,8 +151,8 @@ public class Generator extends JPanel {
 
         ButtonGroup buttonGroup2 = new ButtonGroup();
         buttonGroup2.add(jCheckBox3);
-        buttonGroup2.add(jCheckBox3);
         buttonGroup2.add(jCheckBox4);
+        buttonGroup2.add(jCheckBox5);
 
         jToolBar7.setRollover(true);
 
@@ -247,5 +249,19 @@ public class Generator extends JPanel {
                 - Optional: a colon and port number can follow the domain.
                 - Optional: a path can follow the domain, consisting of letters, numbers, underscores, hyphens, and slashes.
                 """));
+        jComboBox1.addActionListener(e -> {
+            int value = jComboBox1.getSelectedIndex();
+            coreGenerator.setDimension(value, jLabel4);
+        });
+        jCheckBox1.addActionListener(e -> jLabel6.setText("Background: White"));
+        jCheckBox2.addActionListener(e -> jLabel6.setText("Background: Black"));
+        jCheckBox3.addActionListener(e -> jLabel7.setText("Color: Black"));
+        jCheckBox4.addActionListener(e -> jLabel7.setText("Color: White"));
+        jCheckBox5.addActionListener(e -> {
+            String text = coreGenerator.getChosenColor();
+            jLabel7.setText("Color: " + text);
+        });
+        jButton3.addActionListener(e -> coreGenerator.generateQRCode(jTextField1.getText(), "qrcode.png", 512, 512, "PNG", Color.BLUE, Color.RED));
+        jButton4.addActionListener(e -> coreGenerator.reset(jFrame));
     }
 }
