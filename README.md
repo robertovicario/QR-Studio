@@ -2,11 +2,11 @@
 
 ## Overview
 
-
+Generate personalized QR codes for web and mobile effortlessly using QR Studio. Tailor and resize your QR codes as required.
 
 ## User Interface
 
-![1](https://github.com/robertovicario/Keymistry/blob/4ed4adcc55feb5e29f4a7c6cf407c0ed165f008b/img/UI.png)
+![UI](https://github.com/robertovicario/QR-Studio/blob/07a40e3b5e9216766211f90990f0fdaa56093cf5/img/UI.png)
 
 ## Instructions
 
