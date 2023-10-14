@@ -1,6 +1,7 @@
 package core;
 
 import alert.Alert;
+import alert.Info;
 import app.layout.App;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -155,6 +156,8 @@ public class CoreGenerator {
             } catch (IOException e) {
                 new Alert(e.getMessage());
             }
+
+            new Info("QR code successfully generated.");
         }
     }
 

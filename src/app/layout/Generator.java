@@ -298,7 +298,6 @@ public class Generator extends JPanel {
             Color color = coreGenerator.getChosenColor(colorText);
 
             coreGenerator.downloadQRCode(URL, width, height, format, background, color);
-            new Info("QR code successfully generated.");
         });
         jButton4.addActionListener(e -> coreGenerator.resetComponents(jFrame));
     }
