@@ -1,6 +1,6 @@
 package app.layout;
 
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatGitHubIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatLightOwlIJTheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,13 +10,9 @@ import java.awt.*;
  * @version 1.0
  */
 public class App extends JFrame {
-    private final String tab;
-
-    public App(String tab) {
-        this.tab = tab;
-
+    public App() {
         try {
-            UIManager.setLookAndFeel(new FlatGitHubIJTheme());
+            UIManager.setLookAndFeel(new FlatLightOwlIJTheme());
         } catch (UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
@@ -30,12 +26,7 @@ public class App extends JFrame {
 
         jTabbedPane1.addTab("Overview", new Overview());
         jTabbedPane1.addTab("Generator", new Generator());
-
-        if (tab.equals("Generator")) {
-            jTabbedPane1.setSelectedIndex(1);
-        } else {
-            jTabbedPane1.setSelectedIndex(0);
-        }
+        jTabbedPane1.setSelectedIndex(1);
 
         GroupLayout layout = new GroupLayout(jFrame.getContentPane());
         jFrame.getContentPane().setLayout(layout);
@@ -51,7 +42,7 @@ public class App extends JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jTabbedPane1)
-                                .addGap(12, 12, 12))
+                                .addContainerGap())
         );
 
         jFrame.setTitle("QR Studio");

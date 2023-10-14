@@ -11,7 +11,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class Overview extends JPanel {
-    private final JLabel jLabel1 = new JLabel("https://github.com/robertovicario/QR-Studio");
+    private final String repositoryPath = "https://github.com/robertovicario/QR-Studio.git";
+    private final JLabel jLabel1 = new JLabel(repositoryPath);
 
     public Overview() {
         initComponents();
@@ -71,7 +72,7 @@ public class Overview extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    URI uri = new URI("https://github.com/robertovicario/QR-Studio");
+                    URI uri = new URI(repositoryPath);
                     Desktop.getDesktop().browse(uri);
                 } catch (URISyntaxException | IOException ex) {
                     new Alert(ex.getMessage());

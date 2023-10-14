@@ -9,7 +9,7 @@ public class Generator extends JPanel {
         initEvents();
     }
 
-    public void initComponents() {
+    private void initComponents() {
         JPanel jPanel1 = new JPanel();
         JToolBar jToolBar1 = new JToolBar();
         JLabel jLabel1 = new JLabel("URL:");
@@ -211,7 +211,7 @@ public class Generator extends JPanel {
         );
     }
 
-    public void initEvents() {
+    private void initEvents() {
 
     }
 }
