@@ -1,9 +1,31 @@
 package app.layout;
 
+import alert.Info;
+import core.CoreGenerator;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Generator extends JPanel {
+    private final JTextField jTextField1 = new JTextField("https://www.example.com");
+    private final JButton jButton1 = new JButton("Check");
+    private final JLabel jLabel2 = new JLabel("Status: Valid URL");
+    private final JButton jButton2 = new JButton("Info");
+    private final JComboBox<String> jComboBox1 = new JComboBox<>();
+    private final JLabel jLabel4 = new JLabel("Width: 512, Height: 512");
+    private final JLabel jLabel6 = new JLabel("Background: White");
+    private final JCheckBox jCheckBox1 = new JCheckBox("White");
+    private final JCheckBox jCheckBox2 = new JCheckBox("Black");
+    private final JLabel jLabel7 = new JLabel("Color: Black");
+    private final JCheckBox jCheckBox3 = new JCheckBox("Black");
+    private final JCheckBox jCheckBox4 = new JCheckBox("White");
+    private final JCheckBox jCheckBox5 = new JCheckBox("Custom");
+    private final JButton jButton3 = new JButton("Download");
+    private final JButton jButton4 = new JButton("Reset");
+    CoreGenerator coreGenerator = new CoreGenerator();
+
     public Generator() {
         initComponents();
         initEvents();
@@ -14,47 +36,32 @@ public class Generator extends JPanel {
         JToolBar jToolBar1 = new JToolBar();
         JLabel jLabel1 = new JLabel("URL:");
         Box.Filler filler1 = new Box.Filler(new Dimension(12, 0), new Dimension(12, 0), new Dimension(12, 32767));
-        JTextField jTextField1 = new JTextField("https://www.example.com");
         Box.Filler filler2 = new Box.Filler(new Dimension(12, 0), new Dimension(12, 0), new Dimension(12, 32767));
-        JButton jButton1 = new JButton("Check");
         JToolBar jToolBar2 = new JToolBar();
-        JLabel jLabel2 = new JLabel("Status: Valid URL");
         Box.Filler filler3 = new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(32767, 32767));
-        JButton jButton2 = new JButton("Info");
         JSeparator jSeparator1 = new JSeparator();
         JToolBar jToolBar3 = new JToolBar();
         JLabel jLabel3 = new JLabel("Resolution:");
         Box.Filler filler4 = new Box.Filler(new Dimension(12, 0), new Dimension(12, 0), new Dimension(12, 32767));
-        JComboBox<String> jComboBox1 = new JComboBox<>();
         Box.Filler filler5 = new Box.Filler(new Dimension(24, 0), new Dimension(24, 0), new Dimension(24, 32767));
-        JLabel jLabel4 = new JLabel("Width: 512, Height: 512");
         Box.Filler filler6 = new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(32767, 32767));
         JToolBar jToolBar4 = new JToolBar();
         JLabel jLabel5 = new JLabel("Format:");
         Box.Filler filler7 = new Box.Filler(new Dimension(12, 0), new Dimension(12, 0), new Dimension(12, 32767));
-        JComboBox<String> jComboBox2 = new JComboBox<>();
         Box.Filler filler8 = new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(32767, 32767));
         JToolBar jToolBar5 = new JToolBar();
-        JLabel jLabel6 = new JLabel("Background: White");
         Box.Filler filler9 = new Box.Filler(new Dimension(24, 0), new Dimension(24, 0), new Dimension(24, 32767));
-        JCheckBox jCheckBox1 = new JCheckBox("White");
         Box.Filler filler10 = new Box.Filler(new Dimension(24, 0), new Dimension(24, 0), new Dimension(24, 32767));
-        JCheckBox jCheckBox2 = new JCheckBox("Black");
         Box.Filler filler11 = new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(32767, 32767));
         JToolBar jToolBar6 = new JToolBar();
-        JLabel jLabel7 = new JLabel("Color: Black");
+        JComboBox<String> jComboBox2 = new JComboBox<>();
         Box.Filler filler12 = new Box.Filler(new Dimension(24, 0), new Dimension(24, 0), new Dimension(24, 32767));
-        JCheckBox jCheckBox4 = new JCheckBox("Black");
         Box.Filler filler13 = new Box.Filler(new Dimension(24, 0), new Dimension(24, 0), new Dimension(24, 32767));
-        JCheckBox jCheckBox5 = new JCheckBox("White");
         Box.Filler filler15 = new Box.Filler(new Dimension(24, 0), new Dimension(24, 0), new Dimension(24, 32767));
-        JCheckBox jCheckBox6 = new JCheckBox("Custom");
         Box.Filler filler14 = new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(32767, 32767));
         JSeparator jSeparator2 = new JSeparator();
         JToolBar jToolBar7 = new JToolBar();
-        JButton jButton3 = new JButton("Download");
         Box.Filler filler16 = new Box.Filler(new Dimension(0, 0), new Dimension(0, 0), new Dimension(32767, 32767));
-        JButton jButton4 = new JButton("Reset");
 
         jToolBar1.setRollover(true);
         jToolBar1.add(jLabel1);
@@ -112,29 +119,38 @@ public class Generator extends JPanel {
         jCheckBox2.setVerticalTextPosition(SwingConstants.BOTTOM);
         jToolBar5.add(jCheckBox2);
         jToolBar5.add(filler11);
+        
+        ButtonGroup buttonGroup1 = new ButtonGroup();
+        buttonGroup1.add(jCheckBox1);
+        buttonGroup1.add(jCheckBox2);
 
         jToolBar6.setRollover(true);
         jToolBar6.add(jLabel7);
         jToolBar6.add(filler12);
 
-        jCheckBox4.setSelected(true);
+        jCheckBox3.setSelected(true);
+        jCheckBox3.setFocusable(false);
+        jCheckBox3.setHorizontalTextPosition(SwingConstants.CENTER);
+        jCheckBox3.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jToolBar6.add(jCheckBox3);
+        jToolBar6.add(filler13);
+
         jCheckBox4.setFocusable(false);
         jCheckBox4.setHorizontalTextPosition(SwingConstants.CENTER);
         jCheckBox4.setVerticalTextPosition(SwingConstants.BOTTOM);
         jToolBar6.add(jCheckBox4);
-        jToolBar6.add(filler13);
+        jToolBar6.add(filler15);
 
         jCheckBox5.setFocusable(false);
         jCheckBox5.setHorizontalTextPosition(SwingConstants.CENTER);
         jCheckBox5.setVerticalTextPosition(SwingConstants.BOTTOM);
         jToolBar6.add(jCheckBox5);
-        jToolBar6.add(filler15);
-
-        jCheckBox6.setFocusable(false);
-        jCheckBox6.setHorizontalTextPosition(SwingConstants.CENTER);
-        jCheckBox6.setVerticalTextPosition(SwingConstants.BOTTOM);
-        jToolBar6.add(jCheckBox6);
         jToolBar6.add(filler14);
+
+        ButtonGroup buttonGroup2 = new ButtonGroup();
+        buttonGroup2.add(jCheckBox3);
+        buttonGroup2.add(jCheckBox3);
+        buttonGroup2.add(jCheckBox4);
 
         jToolBar7.setRollover(true);
 
@@ -210,6 +226,26 @@ public class Generator extends JPanel {
     }
 
     private void initEvents() {
-
+        jButton1.addActionListener(e -> {
+            String URL = jTextField1.getText();
+            coreGenerator.checkURL(URL);
+        });
+        jTextField1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String URL = jTextField1.getText();
+                coreGenerator.setStatus(URL, jLabel2);
+            }
+        });
+        jButton2.addActionListener(e -> new Info("""
+                Please, make sure the URL follows the required format:
+                
+                - It should start with 'http', 'https', or 'ftp'.
+                - Followed by '://'.
+                - Domain name should contain only letters, numbers, dots, and hyphens.
+                - The domain should end with a two to four-letter top-level domain (TLD).
+                - Optional: a colon and port number can follow the domain.
+                - Optional: a path can follow the domain, consisting of letters, numbers, underscores, hyphens, and slashes.
+                """));
     }
 }
