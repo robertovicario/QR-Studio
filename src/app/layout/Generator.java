@@ -68,8 +68,6 @@ public class Generator extends JPanel {
         jToolBar1.add(jButton1);
 
         jToolBar2.setRollover(true);
-
-        jLabel2.setForeground(Color.RED);
         jToolBar2.add(jLabel2);
         jToolBar2.add(filler3);
 
