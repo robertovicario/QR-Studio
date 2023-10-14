@@ -4,9 +4,7 @@ import alert.Alert;
 import app.layout.App;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
@@ -24,6 +22,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author Roberto Vicario
+ * @version 1.0
+ */
 public class CoreGenerator {
     public void checkURL(String URL) {
         try {
@@ -52,6 +54,14 @@ public class CoreGenerator {
         }
     }
 
+    public Dimension getDimension(int value) {
+        return switch (value) {
+            case 0 -> new Dimension(256, 256);
+            case 2 -> new Dimension(1024, 1024);
+            default -> new Dimension(512, 512);
+        };
+    }
+
     public void setDimension(int value, JLabel jLabel) {
         switch (value) {
             case 0:
@@ -66,54 +76,89 @@ public class CoreGenerator {
         }
     }
 
-    public String getChosenColor() {
+    public String chooseColor() {
         Color selectedColor = JColorChooser.showDialog(null, "Choose Color", Color.BLACK);
         int red = selectedColor.getRed();
         int green = selectedColor.getGreen();
         int blue = selectedColor.getBlue();
-        String rgbString = String.format("RGB [ %d, %d, %d ]", red, green, blue);
 
-        int rgbValue = selectedColor.getRGB();
-        String hexString = String.format("HEX [ #%06X ]", (0xFFFFFF & rgbValue));
-
-        return rgbString + " - " + hexString;
+        return String.format("RGB [ %d, %d, %d ]", red, green, blue);
     }
 
-    public void generateQRCode(String URL, String filePath, int width, int height, String format, Color backgroundColor, Color qrCodeColor) {
+    public Color getChosenColor(String text) {
+        String regex = "RGB \\[ (\\d+), (\\d+), (\\d+) ]";
+        Pattern pattern = java.util.regex.Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+
+        int r = 0, g = 0, b = 0;
+        if (matcher.find()) {
+            r = Integer.parseInt(matcher.group(1));
+            g = Integer.parseInt(matcher.group(2));
+            b = Integer.parseInt(matcher.group(3));
+        }
+
+        return new Color(r, g, b);
+    }
+
+    public BufferedImage generateQRCode(String URL, int width, int height, Color background, Color color) {
         Map<EncodeHintType, Object> hints = new EnumMap<>(EncodeHintType.class);
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
 
+        BitMatrix bitMatrix;
         try {
-            BitMatrix bitMatrix = new QRCodeWriter().encode(URL, BarcodeFormat.QR_CODE, width, height, hints);
-
-            // Create a BufferedImage to apply colors
-            BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-            // Set background color
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
-                    image.setRGB(x, y, backgroundColor.getRGB());
-                }
-            }
-
-            // Set QR code color
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
-                    if (bitMatrix.get(x, y)) {
-                        image.setRGB(x, y, qrCodeColor.getRGB());
-                    }
-                }
-            }
-
-            // Write the image to the specified file
-            ImageIO.write(image, format, new File(filePath));
-        } catch (WriterException | IOException e) {
+            bitMatrix = new QRCodeWriter().encode(URL, BarcodeFormat.QR_CODE, width, height, hints);
+        } catch (WriterException e) {
             new Alert(e.getMessage());
+            return null;
+        }
+
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                image.setRGB(x, y, background.getRGB());
+            }
+        }
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (bitMatrix.get(x, y)) {
+                    image.setRGB(x, y, color.getRGB());
+                }
+            }
+        }
+
+        return image;
+    }
+
+    public void downloadQRCode(String URL, int width, int height, String format, Color background, Color color) {
+        BufferedImage image = generateQRCode(URL, width, height, background, color);
+
+        if (image == null) {
+            new Alert("QR code generation failed.");
+
+            return;
+        }
+
+        JFileChooser fileChooser = new JFileChooser();
+        int saveResult = fileChooser.showSaveDialog(null);
+
+        if (saveResult == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String filePath = selectedFile.getAbsolutePath();
+            if (!filePath.endsWith("." + format)) {
+                filePath += "." + format;
+            }
+
+            try {
+                ImageIO.write(image, format, new File(filePath));
+            } catch (IOException e) {
+                new Alert(e.getMessage());
+            }
         }
     }
 
-    public void reset(JFrame jFrame) {
+    public void resetComponents(JFrame jFrame) {
         jFrame.dispose();
         new App(1);
     }

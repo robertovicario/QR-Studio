@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * @author Roberto Vicario
+ * @version 1.0
+ */
 public class Overview extends JPanel {
     private final String repositoryPath = "https://github.com/robertovicario/QR-Studio.git";
     private final JLabel jLabel1 = new JLabel(repositoryPath);

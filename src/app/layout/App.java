@@ -1,6 +1,6 @@
 package app.layout;
 
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatLightOwlIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class App extends JFrame {
         this.tab = tab;
 
         try {
-            UIManager.setLookAndFeel(new FlatLightOwlIJTheme());
+            UIManager.setLookAndFeel(new FlatHighContrastIJTheme());
         } catch (UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
