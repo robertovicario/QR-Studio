@@ -13,7 +13,7 @@ Generate personalized QR codes for web and mobile effortlessly using QR Studio. 
 Follow these steps to make use of the application:
 
 1. Download the project repository.
-2. Run the file located in `dist/Qr Studio.jar`.
+2. Run the file located in `dist/QR Studio.jar`.
 
 ## License
 
