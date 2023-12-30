@@ -4,9 +4,9 @@
 
 Generate personalized QR codes for web and mobile effortlessly using QR Studio. Tailor and resize your QR codes as required.
 
-## User Interface
-
-![UI](https://github.com/robertovicario/QR-Studio/blob/07a40e3b5e9216766211f90990f0fdaa56093cf5/img/UI.png)
+| <img src="https://raw.githubusercontent.com/robertovicario/QR-Studio/main/img/UI.png" alt="UI.png" width="256"/> |
+| :--: |
+| User Interface |
 
 ## Instructions
 
