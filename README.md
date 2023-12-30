@@ -19,8 +19,11 @@ Follow these steps to make use of the application:
 
 This project is distributed under the [MIT License](https://opensource.org/licenses/MIT). You can find the complete text of the license in the project repository.
 
-## Contact
+## Contacts
 
 For any questions, feedback, or inquiries about this project, feel free to contact me:
 
 - Email: [rvicariodev@gmail.com](mailto:rvicariodev@gmail.com)
+- Website: [robertovicario.com](https://www.robertovicario.com)
+- LinkedIn: [robertovicario](https://www.linkedin.com/in/robertovicario)
+  
