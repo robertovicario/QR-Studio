@@ -17,7 +17,7 @@ Follow these steps to make use of the application:
 
 ## License
 
-This project is distributed under the [MIT License](https://opensource.org/licenses/MIT). You can find the complete text of the license in the project repository.
+This project is distributed under [The MIT License](https://opensource.org/licenses/MIT). You can find the complete text of the license in the project repository.
 
 ## Contacts
 
